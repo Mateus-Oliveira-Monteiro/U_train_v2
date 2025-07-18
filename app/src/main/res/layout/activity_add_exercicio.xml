@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul_escuro"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginTop="40dp">
+
+        <TextView
+            android:id="@+id/nomeTela"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cadastrar exercicio"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:layout_marginBottom="20dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/edtNome"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Nome do Exercício"
+            android:inputType="text"
+            android:padding="12dp"
+            android:textColor="@color/preto_forte"
+            android:textColorHint="@color/cinza_hint" />
+
+        <EditText
+            android:id="@+id/edtMusculos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Músculos Recrutados"
+            android:inputType="text"
+            android:textColor="@color/preto_forte"
+            android:textColorHint="@color/cinza_hint"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/edtDescricao"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="Descrição do Exercício"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:textColor="@color/preto_forte"
+            android:textColorHint="@color/cinza_hint"
+            android:padding="12dp" />
+
+        <EditText
+            android:id="@+id/edtYoutubeId"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/rounded_edittext"
+            android:hint="ID do Vídeo do YouTube"
+            android:inputType="text"
+            android:textColor="@color/preto_forte"
+            android:textColorHint="@color/cinza_hint"
+            android:padding="12dp" />
+
+        <Spinner
+            android:id="@+id/spinnerPlanilha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:background="@color/azul_escuro_contraste"
+            android:padding="12dp"
+            android:popupBackground="@color/azul_escuro_contraste"
+            android:textColorHint="@android:color/white" />
+
+
+        <Button
+            android:id="@+id/btnSalvar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:backgroundTint="@color/amarelo_neon"
+            android:text="Salvar Exercício"
+            android:textColor="@color/azul_escuro" />
+    </LinearLayout>
+</ScrollView>

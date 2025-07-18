@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="azul_escuro">#0B1D3C</color>         <!-- Fundo principal -->
+    <color name="amarelo_neon">#FFFF00</color>        <!-- Botões, destaques -->
+    <color name="branco_texto">#FFFFFF</color>        <!-- Texto normal -->
+    <color name="cinza_hint">#CCCCCC</color>          <!-- Placeholder/hints -->
+    <color name="preto_forte">#000000</color>
+    <color name="white">#FFFFFF</color>         <!-- Para contraste -->
+    <color name="azul_escuro_contraste">#26354D</color>
+</resources>
