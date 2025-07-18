@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import br.com.instituto_federal.utrain.favoritos.Favoritos;
 import br.com.instituto_federal.utrain.planilhas.AddExercicioActivity;
@@ -23,7 +24,7 @@ public class Home extends AppCompatActivity {
         Button p1 = findViewById(R.id.planilha1);
         Button p2 = findViewById(R.id.planilha2);
         Button p3 = findViewById(R.id.planilha3);
-        Button add = findViewById(R.id.adicionarMaisButton);
+        FloatingActionButton add = findViewById(R.id.adicionarMaisButton);
 
         p1.setOnClickListener(v -> abrirPlanilha(1));
         p2.setOnClickListener(v -> abrirPlanilha(2));
