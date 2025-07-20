@@ -65,7 +65,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     private void insertInitialData(SQLiteDatabase db) {
-        // Inserir planilhas padrão
         ContentValues planilhaValues = new ContentValues();
 
         planilhaValues.put(COLUMN_PLANILHA_NOME, "Planilha A");
@@ -80,58 +79,57 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         planilhaValues.put(COLUMN_PLANILHA_DESCRICAO, "Treino de Costas");
         db.insert(TABLE_PLANILHAS, null, planilhaValues);
 
-        // Inserir exercícios padrão
         ContentValues exercicioValues = new ContentValues();
 
-        // Exercícios da Planilha A
+        // Planilha A
         exercicioValues.put(COLUMN_NOME, "Agachamento");
-        exercicioValues.put(COLUMN_DESCRICAO, "Fortalece pernas");
+        exercicioValues.put(COLUMN_DESCRICAO, "Fortalece pernas 1");
         exercicioValues.put(COLUMN_MUSCULOS, "Quadríceps");
-        exercicioValues.put(COLUMN_VIDEO_URL, "V5iNNV9KaVA");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=V5iNNV9KaVA");
         exercicioValues.put(COLUMN_PLANILHA_ID, 1);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
         exercicioValues.put(COLUMN_NOME, "Leg Press");
         exercicioValues.put(COLUMN_DESCRICAO, "Trabalha pernas");
         exercicioValues.put(COLUMN_MUSCULOS, "Quadríceps");
-        exercicioValues.put(COLUMN_VIDEO_URL, "abc123");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=abc123");
         exercicioValues.put(COLUMN_PLANILHA_ID, 1);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
         exercicioValues.put(COLUMN_NOME, "Stiff");
-        exercicioValues.put(COLUMN_DESCRICAO, "Posicione os pés na largura dos ombros, pegue a barra ou halteres, estufe o peito, feche as escapulas, leve APENAS o quadril para trás fazendo com que a barra desça rente ao corpo");
+        exercicioValues.put(COLUMN_DESCRICAO, "Posicione os pés na largura dos ombros, pegue a barra ou halteres...");
         exercicioValues.put(COLUMN_MUSCULOS, "Posterior e Glúteos");
-        exercicioValues.put(COLUMN_VIDEO_URL, "VkLIhN1HSFw");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=VkLIhN1HSFw");
         exercicioValues.put(COLUMN_PLANILHA_ID, 1);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
-        // Exercícios da Planilha B
+        // Planilha B
         exercicioValues.put(COLUMN_NOME, "Supino");
         exercicioValues.put(COLUMN_DESCRICAO, "Fortalece peitoral");
         exercicioValues.put(COLUMN_MUSCULOS, "Peitoral");
-        exercicioValues.put(COLUMN_VIDEO_URL, "eG6b1k2a4g0");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=eG6b1k2a4g0");
         exercicioValues.put(COLUMN_PLANILHA_ID, 2);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
-        exercicioValues.put(COLUMN_NOME, "Crucifixo");
+        exercicioValues.put(COLUMN_NOME, "Crucifixo Reto");
         exercicioValues.put(COLUMN_DESCRICAO, "Isola peitoral");
         exercicioValues.put(COLUMN_MUSCULOS, "Peitoral");
-        exercicioValues.put(COLUMN_VIDEO_URL, "def456");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=uDMmccuPVPQ");
         exercicioValues.put(COLUMN_PLANILHA_ID, 2);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
-        // Exercícios da Planilha C
+        // Planilha C
         exercicioValues.put(COLUMN_NOME, "Remada");
         exercicioValues.put(COLUMN_DESCRICAO, "Fortalece costas");
         exercicioValues.put(COLUMN_MUSCULOS, "Dorsal");
-        exercicioValues.put(COLUMN_VIDEO_URL, "ghi789");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=dUy0chKG-yo");
         exercicioValues.put(COLUMN_PLANILHA_ID, 3);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
         exercicioValues.put(COLUMN_NOME, "Puxada");
         exercicioValues.put(COLUMN_DESCRICAO, "Trabalha costas");
         exercicioValues.put(COLUMN_MUSCULOS, "Dorsal");
-        exercicioValues.put(COLUMN_VIDEO_URL, "jkl012");
+        exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=FepRH_MBX8E");
         exercicioValues.put(COLUMN_PLANILHA_ID, 3);
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
     }

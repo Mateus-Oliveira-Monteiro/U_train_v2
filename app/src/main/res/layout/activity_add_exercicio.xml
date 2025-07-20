@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/azul_escuro"
@@ -65,30 +66,45 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:background="@drawable/rounded_edittext"
-            android:hint="ID do Vídeo do YouTube"
+            android:hint="URL do YouTube"
             android:inputType="text"
             android:textColor="@color/preto_forte"
             android:textColorHint="@color/cinza_hint"
             android:padding="12dp" />
 
+
         <Spinner
             android:id="@+id/spinnerPlanilha"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="76dp"
             android:layout_marginTop="12dp"
             android:background="@color/azul_escuro_contraste"
             android:padding="12dp"
             android:popupBackground="@color/azul_escuro_contraste"
             android:textColorHint="@android:color/white" />
 
-
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnSalvar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:backgroundTint="@color/amarelo_neon"
             android:text="Salvar Exercício"
-            android:textColor="@color/azul_escuro" />
+            android:textColor="@color/azul_escuro"
+            app:cornerRadius="16dp"
+            app:backgroundTint="@color/amarelo_neon" />
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/bottomNavigationView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/amarelo_neon"
+            app:itemIconTint="@color/nav_icon_color"
+            app:itemTextColor="@color/nav_icon_color"
+            app:menu="@menu/bottom_nav_menu"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
     </LinearLayout>
 </ScrollView>
