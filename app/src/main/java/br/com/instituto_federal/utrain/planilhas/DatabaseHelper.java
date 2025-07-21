@@ -97,7 +97,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.insert(TABLE_EXERCICIOS, null, exercicioValues);
 
         exercicioValues.put(COLUMN_NOME, "Stiff");
-        exercicioValues.put(COLUMN_DESCRICAO, "Posicione os pés na largura dos ombros, pegue a barra ou halteres...");
+        exercicioValues.put(COLUMN_DESCRICAO, "Posicione os pés na largura dos ombros, pegue a barra ou halteres, estufe o peito, feche as escapulas, leve APENAS o quadril para trás fazendo com que a barra desça rente ao corpo");
         exercicioValues.put(COLUMN_MUSCULOS, "Posterior e Glúteos");
         exercicioValues.put(COLUMN_VIDEO_URL, "https://www.youtube.com/watch?v=VkLIhN1HSFw");
         exercicioValues.put(COLUMN_PLANILHA_ID, 1);
