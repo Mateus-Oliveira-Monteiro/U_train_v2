@@ -20,6 +20,7 @@ import br.com.instituto_federal.utrain.favoritos.Favoritos;
 import br.com.instituto_federal.utrain.Home;
 import br.com.instituto_federal.utrain.Login;
 import br.com.instituto_federal.utrain.R;
+import android.util.Log;
 
 public class Execucao extends AppCompatActivity {
 
@@ -29,6 +30,8 @@ public class Execucao extends AppCompatActivity {
     private WebView webViewVideo;
     private Button btnTTS;
     private TextToSpeech textToSpeech;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,8 @@ public class Execucao extends AppCompatActivity {
         String musculosRecrutados = intent.getStringExtra("musculosRecrutados");
         String youtubeVideoId = intent.getStringExtra("youtubeVideoId");
 
+        String videoId = extractYoutubeId(youtubeVideoId);
+
 
         if (nomeExercicio != null) {
             tvNomeExercicio.setText(nomeExercicio);
@@ -67,9 +72,20 @@ public class Execucao extends AppCompatActivity {
         if (musculosRecrutados != null) {
             tvMusculosRecrutados.setText(musculosRecrutados);
         }
-        if (youtubeVideoId != null) {
-            String html = "<iframe width=\"100%\" height=\"100%\" src=\"https://www.youtube.com/embed/" + youtubeVideoId + "?autoplay=1&fs=0&iv_load_policy=3&showinfo=0&rel=0&cc_load_policy=0&start=0&end=0&playsinline=1\" frameborder=\"0\" allowfullscreen></iframe>";
-            webViewVideo.loadData(html, "text/html", "utf-8");
+
+        if (videoId != null) {
+            Log.d("Execucao", "Video ID: " + videoId);
+
+            String html = "<html><body style='margin:0;padding:0;'><iframe width=\"100%\" height=\"100%\" " +
+                    "src=\"https://www.youtube.com/embed/" + videoId +
+                    "?autoplay=0&modestbranding=1&playsinline=1\" " +
+                    "frameborder=\"0\" allowfullscreen></iframe></body></html>";
+
+            Log.d("Execucao", "HTML gerado: " + html);
+
+            webViewVideo.loadDataWithBaseURL("https://www.youtube.com", html, "text/html", "utf-8", null);
+        } else {
+            Log.e("Execucao", "videoId está nulo. URL de entrada: " + youtubeVideoId);
         }
 
         // TextToSpeech
@@ -112,6 +128,28 @@ public class Execucao extends AppCompatActivity {
             }
             return true;
         });
+    }
+
+    private String extractYoutubeId(String url) {
+        if (url == null || url.trim().isEmpty()) return null;
+
+        try {
+            if (url.contains("youtu.be/")) {
+                // Ex: https://youtu.be/PwXUHMKamP8?si=xxxxx
+                String path = url.substring(url.indexOf("youtu.be/") + 9);
+                int end = path.indexOf('?');
+                return end != -1 ? path.substring(0, end) : path;
+            } else if (url.contains("youtube.com") && url.contains("v=")) {
+                // Ex: https://www.youtube.com/watch?v=PwXUHMKamP8&ab_channel=xyz
+                String query = url.substring(url.indexOf("v=") + 2);
+                int end = query.indexOf('&');
+                return end != -1 ? query.substring(0, end) : query;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 
     @Override
