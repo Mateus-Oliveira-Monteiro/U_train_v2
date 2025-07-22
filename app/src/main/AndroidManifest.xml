@@ -54,6 +54,11 @@
         <activity android:name=".planilhas.AddExercicioActivity"
             android:exported="false" />
 
+        <activity android:name=".MuscleGroupSelectionActivity"
+            android:exported="false" />
+        <activity android:name=".ExerciseListActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

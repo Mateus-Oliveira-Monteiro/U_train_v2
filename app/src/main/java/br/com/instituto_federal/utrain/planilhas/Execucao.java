@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.Locale;
 
+import br.com.instituto_federal.utrain.MuscleGroupSelectionActivity;
 import br.com.instituto_federal.utrain.favoritos.Favoritos;
 import br.com.instituto_federal.utrain.Home;
 import br.com.instituto_federal.utrain.Login;
@@ -113,20 +114,31 @@ public class Execucao extends AppCompatActivity {
         nav.setSelectedItemId(0); // Nenhum item selecionado por padrão
 
         nav.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.nav_home) {
+            int itemId = item.getItemId();
+            if (itemId == R.id.nav_home) {
                 startActivity(new Intent(this, Home.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
                 return true;
-            } else if (item.getItemId() == R.id.nav_favoritos) {
+            } else if (itemId == R.id.nav_favoritos) {
                 startActivity(new Intent(this, Favoritos.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
                 return true;
-            } else if (item.getItemId() == R.id.nav_logout) {
+            }else if (itemId == R.id.nav_api_exercises) {
+                    startActivity(new Intent(this, MuscleGroupSelectionActivity.class));
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                    finish();
+                    return true;
+            } else if (itemId == R.id.nav_logout) {
                 Toast.makeText(this, "Deslogando...", Toast.LENGTH_SHORT).show();
                 Intent intentLogout = new Intent(this, Login.class);
                 intentLogout.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intentLogout);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
             }
-            return true;
+            return false;
         });
     }
 

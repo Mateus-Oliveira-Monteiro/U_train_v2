@@ -43,6 +43,9 @@ public class Home extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_favoritos) {
                 startActivity(new Intent(this, Favoritos.class));
                 return true;
+            } else if (item.getItemId() == R.id.nav_api_exercises) {
+                startActivity(new Intent(this, MuscleGroupSelectionActivity.class));
+                return true;
             } else if (item.getItemId() == R.id.nav_logout) {
                 Toast.makeText(this, "Deslogando...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, Login.class);

@@ -18,6 +18,7 @@ import java.util.Set;
 
 import br.com.instituto_federal.utrain.Home;
 import br.com.instituto_federal.utrain.Login;
+import br.com.instituto_federal.utrain.MuscleGroupSelectionActivity;
 import br.com.instituto_federal.utrain.R;
 import br.com.instituto_federal.utrain.planilhas.DatabaseHelper;
 import br.com.instituto_federal.utrain.planilhas.Exercicio;
@@ -46,19 +47,34 @@ public class Favoritos extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
+        nav.setSelectedItemId(R.id.nav_favoritos);
+
+
         nav.setOnItemSelectedListener(item -> {
-            if (item.getItemId() == R.id.nav_home) {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
                 startActivity(new Intent(this, Home.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
                 return true;
-            } else if (item.getItemId() == R.id.nav_logout) {
+            } else if (id == R.id.nav_api_exercises) {
+                startActivity(new Intent(this, MuscleGroupSelectionActivity.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+                return true;
+            } else if (id == R.id.nav_logout) {
                 Toast.makeText(this, "Deslogando...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, Login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
             }
-            return true;
+            return false;
         });
+
+        nav.setSelectedItemId(R.id.nav_favoritos);
+
     }
 
     // trocando o carregamento para dados do slq

@@ -9,6 +9,10 @@
         android:title="Favoritos"
         android:icon="@android:drawable/star_big_on" />
     <item
+        android:id="@+id/nav_api_exercises"
+        android:title="Exercícios API"
+        android:icon="@android:drawable/ic_menu_search" />
+    <item
         android:id="@+id/nav_logout"
         android:title="Logout"
         android:icon="@android:drawable/ic_lock_power_off" />
