@@ -56,8 +56,12 @@
 
         <activity android:name=".MuscleGroupSelectionActivity"
             android:exported="false" />
+
         <activity android:name=".ExerciseListActivity"
             android:exported="false" />
+
+        <activity android:name=".Register"
+            android:exported="true" />
 
     </application>
 

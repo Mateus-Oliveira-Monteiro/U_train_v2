@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94451021137",
+    "project_id": "utrain-f4832",
+    "storage_bucket": "utrain-f4832.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94451021137:android:3beea5e11c9f06ee74cf70",
+        "android_client_info": {
+          "package_name": "br.com.instituto_federal.utrain"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAZAFFt8hIkuOTuehP3yLnUyyc9F-cxE70"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
