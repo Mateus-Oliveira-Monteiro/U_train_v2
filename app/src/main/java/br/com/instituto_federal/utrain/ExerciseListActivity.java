@@ -1,5 +1,6 @@
 package br.com.instituto_federal.utrain;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -21,6 +22,7 @@ import java.util.regex.Pattern;
 
 import br.com.instituto_federal.utrain.api.RetrofitClient;
 import br.com.instituto_federal.utrain.api.WgerApiService;
+import br.com.instituto_federal.utrain.favoritos.Favoritos;
 import br.com.instituto_federal.utrain.model.Exercise;
 import br.com.instituto_federal.utrain.model.ExerciseInfo;
 import br.com.instituto_federal.utrain.model.ExerciseResponse;
@@ -67,7 +69,33 @@ public class ExerciseListActivity extends AppCompatActivity {
             Toast.makeText(this, "Erro: Dados do músculo inválidos", Toast.LENGTH_SHORT).show();
             finish();
         }
-        // Adicione a lógica da BottomNavigationView aqui, se necessário
+
+        BottomNavigationView nav = findViewById(R.id.bottomNavigationView);
+        nav.setSelectedItemId(R.id.nav_api_exercises);
+
+        nav.setOnItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                startActivity(new Intent(this, Home.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+                return true;
+            } else if (id == R.id.nav_favoritos) {
+                startActivity(new Intent(this, Favoritos.class));
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                finish();
+                return true;
+            } else if (id == R.id.nav_logout) {
+                Toast.makeText(this, "Deslogando...", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(this, Login.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                return true;
+            }
+            return false;
+        });
+
     }
 
     private void setupRecyclerView() {

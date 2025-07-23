@@ -53,11 +53,13 @@ public abstract class AppDatabase extends RoomDatabase {
                 );
 
                 Exercicio ex1 = new Exercicio();
-                ex1.setNome("Agachamento"); ex1.setDescricao("Fortalece pernas 1"); ex1.setMusculos("Quadríceps"); ex1.setYoutubeId("V5iNNV9KaVA"); ex1.setPlanilhaId(1);
+                ex1.setNome("Agachamento"); ex1.setDescricao("Fortalece pernas 1"); ex1.setMusculos("Quadríceps"); ex1.setYoutubeId("https://www.youtube.com/watch?v=F4gMwaCRM_c"); ex1.setPlanilhaId(1);
                 Exercicio ex2 = new Exercicio();
-                ex2.setNome("Supino"); ex2.setDescricao("Fortalece peitoral"); ex2.setMusculos("Peitoral"); ex2.setYoutubeId("eG6b1k2a4g0"); ex2.setPlanilhaId(2);
+                ex2.setNome("Supino"); ex2.setDescricao("Fortalece peitoral"); ex2.setMusculos("Peitoral"); ex2.setYoutubeId("https://www.youtube.com/watch?v=SWVO95XzxKg"); ex2.setPlanilhaId(2);
+                Exercicio ex3 = new Exercicio();
+                ex3.setNome("Remada com triângulo"); ex3.setDescricao("Fortalece Costas"); ex3.setMusculos("Costas"); ex3.setYoutubeId("https://www.youtube.com/watch?v=WxkMoxuMSho"); ex3.setPlanilhaId(3);
 
-                exercicioDao.insertAll(ex1, ex2);
+                exercicioDao.insertAll(ex1, ex2, ex3);
             });
         }
     };
