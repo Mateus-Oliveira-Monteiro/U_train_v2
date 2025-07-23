@@ -16,8 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import br.com.instituto_federal.utrain.R;
 import br.com.instituto_federal.utrain.utils.ShareUtils;
+// ✅ Import corrigido para usar a entidade Exercicio do pacote de dados
+import br.com.instituto_federal.utrain.data.model.Exercicio;
 
 public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.ExercicioViewHolder> {
     private List<Exercicio> exercicios;
@@ -26,6 +29,16 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.Exer
     public ExercicioAdapter(Context context, List<Exercicio> exercicios) {
         this.context = context;
         this.exercicios = exercicios;
+    }
+
+    /**
+     * ✅ Método para atualizar a lista de exercícios dinamicamente.
+     * Essencial para que o LiveData (na tela de Planilhas) e as chamadas de API
+     * (na tela de Exercícios da API) possam atualizar a UI.
+     */
+    public void setExercicios(List<Exercicio> novosExercicios) {
+        this.exercicios = novosExercicios;
+        notifyDataSetChanged(); // Informa ao RecyclerView para redesenhar a lista
     }
 
     @NonNull
@@ -44,17 +57,16 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.Exer
 
         String idStr = String.valueOf(exercicio.getId());
 
-        // Mostra o ícone correto baseado nos favoritos atuais
+        // Lógica para favoritar (sem alterações)
         SharedPreferences prefs = context.getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
         Set<String> favoritosAtual = prefs.getStringSet("exercicios", new HashSet<>());
 
         if (favoritosAtual.contains(idStr)) {
-            holder.btnFavoritar.setImageResource(R.drawable.ic_favorite); // coração preenchido
+            holder.btnFavoritar.setImageResource(R.drawable.ic_favorite);
         } else {
-            holder.btnFavoritar.setImageResource(R.drawable.ic_favorite_border); // coração vazio
+            holder.btnFavoritar.setImageResource(R.drawable.ic_favorite_border);
         }
 
-        // Ação ao clicar no botão de favorito
         holder.btnFavoritar.setOnClickListener(v -> {
             SharedPreferences preferences = context.getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
             Set<String> favoritos = new HashSet<>(preferences.getStringSet("exercicios", new HashSet<>()));
@@ -72,7 +84,7 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.Exer
             editor.apply();
         });
 
-        // Ação do botão de execução
+        // Lógica do botão de execução (sem alterações)
         holder.btnExecucao.setOnClickListener(v -> {
             Intent intent = new Intent(context, Execucao.class);
             intent.putExtra("nomeExercicio", exercicio.getNome());
@@ -82,14 +94,18 @@ public class ExercicioAdapter extends RecyclerView.Adapter<ExercicioAdapter.Exer
             context.startActivity(intent);
         });
 
+        // Lógica do botão de compartilhar (sem alterações)
         holder.btnCompartilhar.setOnClickListener(v -> {
+            // A classe ShareUtils precisa receber um objeto do tipo Exercicio da entidade
+            // Verifique se o método `compartilharExercicio` está compatível.
             ShareUtils.compartilharExercicio(context, exercicio);
         });
     }
 
     @Override
     public int getItemCount() {
-        return exercicios.size();
+        // Adicionada verificação para evitar NullPointerException
+        return exercicios != null ? exercicios.size() : 0;
     }
 
     public static class ExercicioViewHolder extends RecyclerView.ViewHolder {

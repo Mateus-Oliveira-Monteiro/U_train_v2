@@ -1,26 +1,26 @@
 package br.com.instituto_federal.utrain.api;
 
+import br.com.instituto_federal.utrain.model.ExerciseInfo;
 import br.com.instituto_federal.utrain.model.ExerciseResponse;
 import br.com.instituto_federal.utrain.model.MuscleResponse;
-import br.com.instituto_federal.utrain.model.ExerciseDetail;
-import br.com.instituto_federal.utrain.model.ExerciseDetailResponse;
-import br.com.instituto_federal.utrain.model.ExerciseInfo;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface WgerApiService {
-    @GET("muscle/")
+
+    @GET("muscle")
     Call<MuscleResponse> getMuscles();
 
-    @GET("exercise/")
-    Call<ExerciseResponse> getExercises(@Query("language") int languageId);
+    @GET("exercise")
+    Call<ExerciseResponse> getExercisesByMuscle(
+            @Query("language") int languageId,
+            @Query("muscles") int muscleId,
+            @Query("limit") int limit
+    );
 
-    @GET("exerciseinfo/")
-    Call<ExerciseDetailResponse> getExerciseDetail(@Query("exercise") int exerciseId, @Query("language") int languageId);
-
+    // ✅ MÉTODO ADICIONADO DE VOLTA: Essencial para buscar os detalhes
     @GET("exerciseinfo/{id}/")
-    Call<ExerciseInfo> getExerciseById(@Path("id") int exerciseId);
+    Call<ExerciseInfo> getExerciseInfoById(@Path("id") int exerciseId);
 }
-
