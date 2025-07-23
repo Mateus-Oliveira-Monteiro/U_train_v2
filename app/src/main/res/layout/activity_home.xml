@@ -65,6 +65,17 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
+    <Button
+        android:id="@+id/testNotificationButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="24dp"
+        android:text="@string/testar_notificacoes"
+        app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent" />
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/adicionarMaisButton"
         android:layout_width="wrap_content"
@@ -84,9 +95,9 @@
         android:backgroundTint="@color/amarelo_neon"
         app:itemIconTint="@color/nav_icon_color"
         app:itemTextColor="@color/nav_icon_color"
-        app:menu="@menu/bottom_nav_menu"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:menu="@menu/bottom_nav_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

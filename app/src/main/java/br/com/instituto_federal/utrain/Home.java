@@ -1,11 +1,18 @@
 package br.com.instituto_federal.utrain;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+import static android.Manifest.permission.POST_NOTIFICATIONS;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -16,10 +23,27 @@ import br.com.instituto_federal.utrain.planilhas.AddExercicioActivity;
 import br.com.instituto_federal.utrain.planilhas.Planilha;
 
 public class Home extends AppCompatActivity {
+    private static final int NOTIFICATION_PERMISSION_REQUEST_CODE = 1001;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        // Inicializar notificações
+        setupNotifications();
+
+        // Solicitar permissão de notificação
+        requestNotificationPermission();
+
+        // Botão para testar notificações
+        Button testNotificationButton = findViewById(R.id.testNotificationButton);
+        testNotificationButton.setOnClickListener(v -> {
+            NotificationHelper notificationHelper = new NotificationHelper(this);
+            notificationHelper.showTestNotification(); // Mostra imediatamente
+            Toast.makeText(this, "Notificação de teste enviada!", Toast.LENGTH_SHORT).show();
+        });
 
         // Botões de planilhas
         Button p1 = findViewById(R.id.planilha1);
@@ -61,9 +85,40 @@ public class Home extends AppCompatActivity {
         });
     }
 
+    private void setupNotifications() {
+        NotificationHelper notificationHelper = new NotificationHelper(this);
+        notificationHelper.scheduleWorkoutReminder();
+        notificationHelper.scheduleWaterReminder();
+    }
+
+    private void requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (ContextCompat.checkSelfPermission(this, POST_NOTIFICATIONS)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{POST_NOTIFICATIONS},
+                        NOTIFICATION_PERMISSION_REQUEST_CODE);
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == NOTIFICATION_PERMISSION_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permissão de notificação concedida!", Toast.LENGTH_SHORT).show();
+                // Configurar notificações após permissão concedida
+                setupNotifications();
+            } else {
+                Toast.makeText(this, "Permissão de notificação negada!", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
     private void abrirPlanilha(int planilhaId) {
         Intent intent = new Intent(this, Planilha.class);
         intent.putExtra("planilhaId", planilhaId);
         startActivity(intent);
     }
 }
+

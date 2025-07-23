@@ -17,6 +17,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Utrain"
         tools:targetApi="31">
+
+        <receiver
+            android:name=".NotificationReceiver" />
+
         <activity
             android:name=".alunos.AlunosActivity"
             android:exported="false" />
@@ -33,9 +37,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".favoritos.FavoritosAdapter"
-            android:exported="false" />
         <activity
             android:name=".Home"
             android:exported="true" /> <!-- Definir como tela principal (launcher) -->
@@ -65,4 +66,6 @@
             android:exported="true" />
     </application>
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
 </manifest>

@@ -16,4 +16,5 @@
     <string name="erro_atualizar_aluno">Erro ao atualizar aluno: %s</string>
     <string name="erro_excluir_aluno">Erro ao excluir aluno: %s</string>
     <string name="erro_carregar_alunos">Erro ao carregar alunos: %s</string>
+    <string name="testar_notificacoes">Testar Notificações</string>
 </resources>
