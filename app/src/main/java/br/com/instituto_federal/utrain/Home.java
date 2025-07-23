@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import br.com.instituto_federal.utrain.alunos.AlunosActivity;
 import br.com.instituto_federal.utrain.favoritos.Favoritos;
 import br.com.instituto_federal.utrain.planilhas.AddExercicioActivity;
 import br.com.instituto_federal.utrain.planilhas.Planilha;
@@ -43,11 +44,17 @@ public class Home extends AppCompatActivity {
             if (item.getItemId() == R.id.nav_favoritos) {
                 startActivity(new Intent(this, Favoritos.class));
                 return true;
+            } else if (item.getItemId() == R.id.nav_api_exercises) {
+                startActivity(new Intent(this, MuscleGroupSelectionActivity.class));
+                return true;
             } else if (item.getItemId() == R.id.nav_logout) {
                 Toast.makeText(this, "Deslogando...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(this, Login.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);
+                return true;
+            } else if (item.getItemId() == R.id.nav_alunos) {
+                startActivity(new Intent(this, AlunosActivity.class));
                 return true;
             }
             return true;

@@ -9,20 +9,21 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
 import br.com.instituto_federal.utrain.R;
 import br.com.instituto_federal.utrain.planilhas.Execucao;
-import br.com.instituto_federal.utrain.planilhas.Exercicio;
+// ✅ Import corrigido para a nova entidade Exercicio
+import br.com.instituto_federal.utrain.data.model.Exercicio;
 import br.com.instituto_federal.utrain.utils.ShareUtils;
-
-import com.google.android.material.snackbar.Snackbar;
 
 public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.ExercicioViewHolder> {
     private List<Exercicio> exercicios;
@@ -31,7 +32,15 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
     public FavoritosAdapter(Context context, List<Exercicio> exercicios) {
         this.context = context;
         this.exercicios = exercicios;
+    }
 
+    /**
+     * ✅ Método para atualizar a lista de exercícios dinamicamente.
+     * Será útil na Activity de Favoritos para atualizar a lista após buscar os dados.
+     */
+    public void setExercicios(List<Exercicio> novosExercicios) {
+        this.exercicios = novosExercicios;
+        notifyDataSetChanged();
     }
 
     @NonNull
@@ -43,6 +52,8 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
 
     @Override
     public void onBindViewHolder(@NonNull ExercicioViewHolder holder, int position) {
+        // A lógica aqui permanece a mesma, pois a nova entidade Exercicio
+        // tem os mesmos métodos (getNome, getId, etc.)
         Exercicio exercicio = exercicios.get(position);
         holder.nome.setText(exercicio.getNome());
         holder.descricao.setText(exercicio.getDescricao());
@@ -51,6 +62,8 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
         String idStr = String.valueOf(exercicio.getId());
 
         SharedPreferences prefs = context.getSharedPreferences("FAVORITOS", Context.MODE_PRIVATE);
+
+        // Define o ícone inicial do coração
         Set<String> favoritos = prefs.getStringSet("exercicios", new HashSet<>());
         if (favoritos.contains(idStr)) {
             holder.btnFavoritar.setImageResource(R.drawable.ic_favorite);
@@ -58,6 +71,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
             holder.btnFavoritar.setImageResource(R.drawable.ic_favorite_border);
         }
 
+        // Lógica para favoritar/desfavoritar
         holder.btnFavoritar.setOnClickListener(v -> {
             SharedPreferences.Editor editor = prefs.edit();
             Set<String> atualizados = new HashSet<>(prefs.getStringSet("exercicios", new HashSet<>()));
@@ -67,35 +81,38 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
                 holder.btnFavoritar.setImageResource(R.drawable.ic_favorite_border);
 
                 int pos = holder.getAdapterPosition();
-                Exercicio removido = exercicios.get(pos);
-                // Remove da lista atual e notifica
-                exercicios.remove(pos);
-                notifyItemRemoved(pos);
-                editor.putStringSet("exercicios", atualizados);
-                editor.apply();
+                if (pos != RecyclerView.NO_POSITION) {
+                    Exercicio removido = exercicios.get(pos);
+                    exercicios.remove(pos);
+                    notifyItemRemoved(pos);
 
-                Snackbar.make(holder.itemView, "Exercício retirado dos favoritos. Deseja desfazer?", Snackbar.LENGTH_LONG)
-                        .setAction("Desfazer", view -> {
-                            atualizados.add(idStr);
-                            editor.putStringSet("exercicios", atualizados);
-                            editor.apply();
+                    editor.putStringSet("exercicios", atualizados);
+                    editor.apply();
 
-                            exercicios.add(pos, removido);
-                            notifyItemInserted(pos);
-                        })
-                        .show();
+                    Snackbar.make(holder.itemView, "Exercício removido dos favoritos.", Snackbar.LENGTH_LONG)
+                            .setAction("Desfazer", view -> {
+                                Set<String> favoritosParaRestaurar = new HashSet<>(prefs.getStringSet("exercicios", new HashSet<>()));
+                                favoritosParaRestaurar.add(idStr);
+                                editor.putStringSet("exercicios", favoritosParaRestaurar);
+                                editor.apply();
 
+                                exercicios.add(pos, removido);
+                                notifyItemInserted(pos);
+                                holder.btnFavoritar.setImageResource(R.drawable.ic_favorite);
+                            })
+                            .show();
+                }
             } else {
+                // Este 'else' é para o caso de um exercício que não está na lista de favoritos
+                // ser favoritado novamente (não deve acontecer nesta tela, mas é uma boa prática).
                 atualizados.add(idStr);
                 holder.btnFavoritar.setImageResource(R.drawable.ic_favorite);
                 editor.putStringSet("exercicios", atualizados);
                 editor.apply();
             }
-
-            editor.putStringSet("exercicios", atualizados);
-            editor.apply();
         });
 
+        // Lógica do botão de execução (sem alterações)
         holder.btnExecucao.setOnClickListener(v -> {
             Intent intent = new Intent(context, Execucao.class);
             intent.putExtra("nomeExercicio", exercicio.getNome());
@@ -105,6 +122,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
             context.startActivity(intent);
         });
 
+        // Lógica do botão de compartilhar (sem alterações)
         holder.btnCompartilhar.setOnClickListener(v -> {
             ShareUtils.compartilharExercicio(context, exercicio);
         });
@@ -112,7 +130,7 @@ public class FavoritosAdapter extends RecyclerView.Adapter<FavoritosAdapter.Exer
 
     @Override
     public int getItemCount() {
-        return exercicios.size();
+        return exercicios != null ? exercicios.size() : 0;
     }
 
     public static class ExercicioViewHolder extends RecyclerView.ViewHolder {

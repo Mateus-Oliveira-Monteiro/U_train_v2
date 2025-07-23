@@ -73,4 +73,22 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp" />
 
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/amarelo_neon"
+        android:padding="12dp"
+        android:text="CADASTRAR"
+        android:textAllCaps="true"
+        android:textColor="@color/azul_escuro"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/passwordInput" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

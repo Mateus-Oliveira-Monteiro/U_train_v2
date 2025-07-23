@@ -10,13 +10,15 @@ import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
 import br.com.instituto_federal.utrain.R;
+import br.com.instituto_federal.utrain.data.AppDatabase;
+import br.com.instituto_federal.utrain.data.model.Exercicio;
 
 public class AddExercicioActivity extends Activity {
 
     private EditText edtNome, edtMusculos, edtDescricao, edtYoutubeId;
     private Spinner spinnerPlanilha;
     private Button btnSalvar;
-    private DatabaseHelper db;
+    private AppDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +32,7 @@ public class AddExercicioActivity extends Activity {
         spinnerPlanilha = findViewById(R.id.spinnerPlanilha);
         btnSalvar = findViewById(R.id.btnSalvar);
 
-        db = new DatabaseHelper(this);
+        db = AppDatabase.getDatabase(this);
 
         setupSpinner();
 
@@ -45,19 +47,26 @@ public class AddExercicioActivity extends Activity {
                 return;
             }
 
-            int planilhaId = spinnerPlanilha.getSelectedItemPosition() + 1; // +1 porque as planilhas começam em 1
+            int planilhaId = spinnerPlanilha.getSelectedItemPosition() + 1;
 
-            Exercicio exercicio = new Exercicio(null, nome, descricao, musculos, youtubeId, planilhaId);
-            long resultado = db.adicionarExercicio(exercicio);
+            // ✅ CORREÇÃO: Usando o construtor vazio e os métodos setters
+            Exercicio novoExercicio = new Exercicio();
+            novoExercicio.setNome(nome);
+            novoExercicio.setDescricao(descricao);
+            novoExercicio.setMusculos(musculos);
+            novoExercicio.setYoutubeId(youtubeId);
+            novoExercicio.setPlanilhaId(planilhaId);
 
-            if (resultado != -1) {
-                Toast.makeText(this, "Exercício salvo com sucesso!", Toast.LENGTH_SHORT).show();
-                Intent returnIntent = new Intent();
-                setResult(RESULT_OK, returnIntent);
-                finish();
-            } else {
-                Toast.makeText(this, "Erro ao salvar exercício", Toast.LENGTH_SHORT).show();
-            }
+            // Inserção na thread de banco
+            AppDatabase.databaseWriteExecutor.execute(() -> {
+                db.exercicioDao().insert(novoExercicio);
+
+                runOnUiThread(() -> {
+                    Toast.makeText(this, "Exercício salvo com sucesso!", Toast.LENGTH_SHORT).show();
+                    setResult(RESULT_OK, new Intent());
+                    finish();
+                });
+            });
         });
     }
 

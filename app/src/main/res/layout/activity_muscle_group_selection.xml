@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/azul_escuro">
+
+    <TextView
+        android:id="@+id/tvTituloGrupos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
+        android:text="Selecione o Grupo Muscular"
+        android:textColor="@color/amarelo_neon"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imgCorpo"
+        android:layout_width="191dp"
+        android:layout_height="254dp"
+        android:layout_marginTop="16dp"
+        android:contentDescription="Corpo Humano"
+        android:src="@drawable/img_corpo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTituloGrupos" />
+
+    <ScrollView
+        android:id="@+id/scrollMuscleGroups"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintTop_toBottomOf="@id/imgCorpo"
+        app:layout_constraintBottom_toTopOf="@id/bottomNavigationView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="8dp"
+        android:padding="12dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center">
+
+            <!-- Linhas de botões -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btn_ombros"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Ombros" />
+
+                <Button
+                    android:id="@+id/btn_biceps"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Bíceps" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btn_triceps"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Tríceps" />
+
+                <Button
+                    android:id="@+id/btn_peito"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Peito" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btn_abdomen"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Abdômen" />
+
+                <Button
+                    android:id="@+id/btn_quadriceps"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Quadríceps" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btn_isquiotibiais"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Isquiotibiais" />
+
+                <Button
+                    android:id="@+id/btn_gluteos"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Glúteos" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="12dp">
+
+                <Button
+                    android:id="@+id/btn_panturrilhas"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Panturrilhas" />
+
+                <Button
+                    android:id="@+id/btn_costas"
+                    style="@style/EstiloBotaoMusculo"
+                    android:text="Costas" />
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <!-- Bottom navigation -->
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavigationView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/amarelo_neon"
+        app:itemIconTint="@color/nav_icon_color"
+        app:itemTextColor="@color/nav_icon_color"
+        app:menu="@menu/bottom_nav_menu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
