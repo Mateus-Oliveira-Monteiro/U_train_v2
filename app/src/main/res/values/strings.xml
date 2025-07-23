@@ -1,3 +1,19 @@
 <resources>
     <string name="app_name">Utrain</string>
+    <string name="editar">Editar</string>
+    <string name="excluir">Excluir</string>
+    <string name="alunos">Alunos</string>
+    <string name="cadastrar_aluno">Cadastrar Aluno</string>
+    <string name="editar_aluno">Editar Aluno</string>
+    <string name="confirmar_exclusao">Confirmar exclusão</string>
+    <string name="tem_certeza_excluir">Tem certeza que deseja excluir o aluno %s?</string>
+    <string name="sim">Sim</string>
+    <string name="cancelar">Cancelar</string>
+    <string name="aluno_cadastrado_sucesso">Aluno cadastrado com sucesso!</string>
+    <string name="aluno_atualizado_sucesso">Aluno atualizado com sucesso!</string>
+    <string name="aluno_excluido_sucesso">Aluno excluído com sucesso!</string>
+    <string name="erro_cadastrar_aluno">Erro ao cadastrar aluno: %s</string>
+    <string name="erro_atualizar_aluno">Erro ao atualizar aluno: %s</string>
+    <string name="erro_excluir_aluno">Erro ao excluir aluno: %s</string>
+    <string name="erro_carregar_alunos">Erro ao carregar alunos: %s</string>
 </resources>

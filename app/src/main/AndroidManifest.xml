@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="br.com.instituto_federal.utrain">
-
     <!-- Permissões -->
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -18,7 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Utrain"
         tools:targetApi="31">
-
+        <activity
+            android:name=".alunos.AlunosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".alunos.FormularioAlunoActivity"
+            android:exported="false" />
         <!-- Tela de Login -->
         <activity
             android:name=".Login"
@@ -29,40 +33,36 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
         <activity
             android:name=".favoritos.FavoritosAdapter"
             android:exported="false" />
-
-        <activity android:name=".Home"
-            android:exported="true"/>
-            <!-- Definir como tela principal (launcher) -->
-
-        <activity android:name=".planilhas.Planilha"
+        <activity
+            android:name=".Home"
+            android:exported="true" /> <!-- Definir como tela principal (launcher) -->
+        <activity
+            android:name=".planilhas.Planilha"
             android:exported="true" />
-
-        <activity android:name=".favoritos.Favoritos"
+        <activity
+            android:name=".favoritos.Favoritos"
             android:exported="false" />
-
-        <activity android:name=".planilhas.Execucao"
+        <activity
+            android:name=".planilhas.Execucao"
             android:exported="false" />
-
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:exported="true" />
-
-        <activity android:name=".planilhas.AddExercicioActivity"
+        <activity
+            android:name=".planilhas.AddExercicioActivity"
             android:exported="false" />
-
-        <activity android:name=".MuscleGroupSelectionActivity"
+        <activity
+            android:name=".MuscleGroupSelectionActivity"
             android:exported="false" />
-
-        <activity android:name=".ExerciseListActivity"
+        <activity
+            android:name=".ExerciseListActivity"
             android:exported="false" />
-
-        <activity android:name=".Register"
+        <activity
+            android:name=".Register"
             android:exported="true" />
-
     </application>
 
 </manifest>
